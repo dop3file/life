@@ -21,9 +21,8 @@ class BoardList(list):
 
 class Board:
     def __init__(self, config: Config, generation_rules: GenerationRules):
-        self._board = BoardList(
-            BoardList([Cell(alive=False, future=False) for _ in range(config.col)]) for _ in range(config.row)
-        )
+        self.config = config
+        self._board = self.init_board()
         self.generation = GenerationBase(self._board, generation_rules)
 
     def update_cell(self, position: Vector2):
@@ -35,6 +34,14 @@ class Board:
     @property
     def board(self) -> list[list[Cell]]:
         return self._board
+
+    def clear_board(self):
+        self._board = self.init_board()
+
+    def init_board(self) -> BoardList:
+        return BoardList(
+            BoardList([Cell(alive=False, future=False) for _ in range(self.config.col)]) for _ in range(self.config.row)
+        )
 
 
 

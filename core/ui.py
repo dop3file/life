@@ -6,7 +6,7 @@ from pygame.color import THECOLORS
 
 class UIElement:
     def draw(self, *args, **kwargs):
-        ...
+        raise NotImplemented
 
 
 class Button(UIElement):
@@ -59,4 +59,17 @@ class UIFactory:
             text_color=THECOLORS["black"],
             font_size=36,
             text="Начать"
+        )
+
+    @staticmethod
+    def create_clear_button() -> Button:
+        return Button(
+            x=175,
+            y=700,
+            width=125,
+            height=50,
+            color=THECOLORS["orange"],
+            text_color=THECOLORS["black"],
+            font_size=36,
+            text="Очистить"
         )
